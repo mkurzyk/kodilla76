@@ -13,14 +13,15 @@
 	"init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
 
 	"build": "npm-run-all build:* test",
-	"build:sass": "node-sass --output-style compact -o css sass",
-	"build:autoprefixer": "autoprefixer-cli css/style.css",
-
+    "build:clean": "rimraf scss/*.scss css/*.css",
+	"build:sassprefixer": "node-sass --output-style compact -o css sass autoprefixer-cli css/style.css",
+    
 	"build-dev:sass": "node-sass --output-style expanded --source-map true -o css sass",
 
 	"watch": "npm-run-all build -p watch:*",
 	"watch:sass": "node-sass --output-style expanded --source-map true -o css sass --watch",
-	"watch:autoprefixer": "onchange -d 100 css/style.css -- autoprefixer-cli -o css/style.prefixed.css css/style.css"
+	"watch:autoprefixer": "onchange -d 100 css/style.css -- autoprefixer-cli -o css/style.prefixed.css css/style.css",
+    "watch:browsersync": "node_modules/.bin/browser-sync start --server --files \"css*.css\" \"*.html\""
 },
   "keywords": [],
   "author": "",
